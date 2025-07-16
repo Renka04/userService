@@ -24,6 +24,11 @@ public class UserKeys {
     @Lob
     private String signedPreKey;
 
+    @Lob
+    @Column(name = "private_identity_key")
+    private String privateIdentityKey;
+
+
     public UserKeys(Long userId, User user, String identityKey, String signedPreKey, List<String> oneTimePreKeys, LocalDateTime lastKeyRotation) {
         this.userId = userId;
         this.user = user;
@@ -81,6 +86,14 @@ public class UserKeys {
 
     public void setLastKeyRotation(LocalDateTime lastKeyRotation) {
         this.lastKeyRotation = lastKeyRotation;
+    }
+
+    public String getPrivateIdentityKey() {
+        return privateIdentityKey;
+    }
+
+    public void setPrivateIdentityKey(String privateIdentityKey) {
+        this.privateIdentityKey = privateIdentityKey;
     }
 
     @ElementCollection

@@ -11,6 +11,8 @@ public class UserKeysDto {
     private String identityKey;
     private String signedPreKey;
     private List<String> oneTimePreKeys;
+    private String privateIdentityKey;
+
 
     public UserKeysDto(String identityKey, String signedPreKey, List<String> oneTimePreKeys) {
         this.identityKey = identityKey;
@@ -43,6 +45,14 @@ public class UserKeysDto {
 
     public void setOneTimePreKeys(List<String> oneTimePreKeys) {
         this.oneTimePreKeys = oneTimePreKeys;
+    }
+
+    public String getPrivateIdentityKey() {
+        return privateIdentityKey;
+    }
+
+    public void setPrivateIdentityKey(String privateIdentityKey) {
+        this.privateIdentityKey = privateIdentityKey;
     }
 }
 

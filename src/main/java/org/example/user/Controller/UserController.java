@@ -6,6 +6,7 @@ import org.example.user.Service.UserKeysService;
 import org.example.user.Service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.whispersystems.libsignal.InvalidKeyException;
 
 import java.util.List;
 
@@ -50,16 +51,5 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         boolean deleted = userService.deleteUser(id);
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
-    }
-
-    @PostMapping("/{id}/keys")
-    public ResponseEntity<Void> uploadKeys(@PathVariable Long id, @RequestBody UserKeysDto dto) {
-        userKeysService.saveKeys(id, dto);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/{id}/keys")
-    public ResponseEntity<UserKeysDto> getKeys(@PathVariable Long id) {
-        return ResponseEntity.ok(userKeysService.getKeys(id));
     }
 }
