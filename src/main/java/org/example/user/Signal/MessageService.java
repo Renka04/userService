@@ -20,10 +20,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Service
-public class Message {
+public class MessageService {
     private final UserKeysRepository userKeysRepository;
 
-    public Message(UserKeysRepository userKeysRepository) {
+    public MessageService(UserKeysRepository userKeysRepository) {
         this.userKeysRepository = userKeysRepository;
     }
 
@@ -113,7 +113,5 @@ public class Message {
         byte[] decrypted = cipher.decrypt(message);
         return new String(decrypted, StandardCharsets.UTF_8);
     }
-
-
 
 }

@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.user.Service.UserKeysService;
-import org.example.user.Signal.Message;
+import org.example.user.Signal.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserKeysController {
 
     private final UserKeysService userKeysService;
-    private final Message messageService;
+    private final MessageService messageService;
 
-    public UserKeysController(UserKeysService userKeysService, Message messageService) {
+    public UserKeysController(UserKeysService userKeysService, MessageService messageService) {
         this.userKeysService = userKeysService;
         this.messageService = messageService;
     }

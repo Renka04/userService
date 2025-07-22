@@ -64,7 +64,6 @@ public class UserController {
 
     @GetMapping("/{id}/qr")
     public ResponseEntity<byte[]> getUserQr(@PathVariable Long id) throws WriterException, IOException, IOException {
-        // For example, encode a URL to the user's profile page
         String qrText = "https://yourfrontend.com/user/" + id;
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
