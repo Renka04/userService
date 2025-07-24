@@ -1,7 +1,7 @@
 package org.example.user.Signal;
 
 import org.example.user.Entity.UserKeys;
-import org.example.user.Repo.UserKeysRepository;
+import org.example.user.Repo.jpa.UserKeysRepository;
 import org.springframework.stereotype.Service;
 import org.whispersystems.libsignal.*;
 import org.whispersystems.libsignal.ecc.Curve;

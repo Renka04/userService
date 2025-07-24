@@ -1,7 +1,7 @@
 package org.example.user.Service;
 
 import org.example.user.Entity.ChatMessage;
-import org.example.user.Repo.ChatMessageRepository;
+import org.example.user.Repo.mongo.ChatMessageMongoRepository;
 import org.example.user.Signal.MessageService;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +11,14 @@ import java.util.List;
 @Service
 public class ChatService {
 
-    private final ChatMessageRepository chatMessageRepository;
+    private final ChatMessageMongoRepository chatMessageRepository;
     private final MessageService messageService;
 
-    public ChatService(ChatMessageRepository chatMessageRepository, MessageService messageService) {
+    public ChatService(ChatMessageMongoRepository chatMessageRepository, MessageService messageService) {
         this.chatMessageRepository = chatMessageRepository;
         this.messageService = messageService;
     }
+
 
     public void sendMessage(Long senderId, Long receiverId, String plainText) throws Exception {
         String encrypted = messageService.encryptMessage(senderId, receiverId, plainText);
@@ -32,7 +33,8 @@ public class ChatService {
     }
 
     public List<String> getConversation(Long user1, Long user2) {
-        List<ChatMessage> messages = chatMessageRepository.findConversation(user1, user2);
+        List<ChatMessage> messages = chatMessageRepository
+                .findBySenderIdAndReceiverIdOrReceiverIdAndSenderId(user1, user2, user1, user2);
 
         return messages.stream()
                 .map(msg -> {
@@ -46,4 +48,5 @@ public class ChatService {
                 })
                 .toList();
     }
+
 }

@@ -1,11 +1,12 @@
 package org.example.user.Entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Document(collection = "chat_message")
 public class ChatMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

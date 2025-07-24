@@ -1,14 +1,11 @@
 package org.example.user.Service;
 
 
-import lombok.RequiredArgsConstructor;
 import org.example.user.Dto.UserKeysDto;
 import org.example.user.Entity.User;
 import org.example.user.Entity.UserKeys;
-import org.example.user.Repo.UserKeysRepository;
-import org.example.user.Repo.UserRepository;
-import org.example.user.Signal.SignalKeyUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.user.Repo.jpa.UserKeysRepository;
+import org.example.user.Repo.jpa.UserRepository;
 import org.springframework.stereotype.Service;
 import org.whispersystems.libsignal.IdentityKeyPair;
 import org.whispersystems.libsignal.InvalidKeyException;
