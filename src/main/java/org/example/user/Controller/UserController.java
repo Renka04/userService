@@ -6,14 +6,11 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import org.example.user.Dto.UserDto;
-import org.example.user.Dto.UserKeysDto;
-import org.example.user.Service.UserKeysService;
 import org.example.user.Service.UserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.whispersystems.libsignal.InvalidKeyException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,13 +21,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final UserKeysService userKeysService;
 
 
 
     public UserController(UserService userService) {
         this.userService = userService;
-        this.userKeysService = null;
     }
 
     @PostMapping
