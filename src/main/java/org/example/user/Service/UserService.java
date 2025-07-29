@@ -3,7 +3,7 @@ package org.example.user.Service;
 import org.example.user.Dto.UserDto;
 import org.example.user.Entity.User;
 import org.example.user.Mapper.UserMapper;
-import org.example.user.Repo.jpa.UserRepository;
+import org.example.user.Repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
