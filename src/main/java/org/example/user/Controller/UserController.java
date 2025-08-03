@@ -8,9 +8,11 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import org.example.user.Dto.UserDto;
 import org.example.user.Service.UserService;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -72,4 +74,17 @@ public class UserController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_PNG_VALUE)
                 .body(pngData);
     }
+
+    @PostMapping("/{id}/upload-profile-image")
+    public ResponseEntity<String> uploadProfileImage(@PathVariable Long id,
+                                                     @RequestParam("image") MultipartFile imageFile) {
+
+        try {
+            String imageUrl = userService.saveProfileImage(id, imageFile);
+            return ResponseEntity.ok(imageUrl);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Image upload failed");
+        }
+    }
+
 }

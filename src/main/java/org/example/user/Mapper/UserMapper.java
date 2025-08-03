@@ -20,7 +20,9 @@ public class UserMapper {
                 user.getJob(),
                 user.getLink(),
                 user.getQrCodeUrl(),
-                user.getProfileImageUrl()
+                user.getProfileImageUrl(),
+                user.getMobilePhone(),
+                user.getGender()
         );
     }
 
@@ -38,6 +40,8 @@ public class UserMapper {
         user.setLink(dto.getLink());
         user.setQrCodeUrl(dto.getQrCodeUrl());
         user.setProfileImageUrl(dto.getProfileImageUrl());
+        user.setMobilePhone(dto.getMobilePhone());
+        user.setGender(dto.getGender());
         return user;
     }
 }

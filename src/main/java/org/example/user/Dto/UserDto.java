@@ -14,8 +14,12 @@ public class UserDto {
     private String link;
     private String qrCodeUrl;
     private String profileImageUrl;
+    private String gender;
+    private String mobilePhone;
 
-    public UserDto(Long id, String username, String email, String bio, String location, String job, String link, String qrCodeUrl, String profileImageUrl) {
+
+    public UserDto(Long id, String username, String email, String bio, String location, String job, String link, String qrCodeUrl,
+                   String profileImageUrl, String gender, String mobilePhone ) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -25,6 +29,8 @@ public class UserDto {
         this.link = link;
         this.qrCodeUrl = qrCodeUrl;
         this.profileImageUrl = profileImageUrl;
+        this.gender = gender;
+        this.mobilePhone = mobilePhone;
     }
 
     public UserDto( ) {
@@ -100,5 +106,21 @@ public class UserDto {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 }

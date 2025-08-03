@@ -11,9 +11,14 @@ import org.example.user.Mapper.UserMapper;
 import org.example.user.Repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -88,6 +93,8 @@ public class UserService {
             existingUser.setLink(dto.getLink());
             existingUser.setQrCodeUrl(dto.getQrCodeUrl());
             existingUser.setProfileImageUrl(dto.getProfileImageUrl());
+            existingUser.setMobilePhone(dto.getMobilePhone());
+            existingUser.setGender(dto.getGender());
             return userMapper.toDto(userRepository.save(existingUser));
         }).orElse(null);
     }
@@ -100,4 +107,25 @@ public class UserService {
         }
         return false;
     }
+
+    public String saveProfileImage(Long userId, MultipartFile file) throws IOException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+        String fileName = "profile_" + userId + "_" + System.currentTimeMillis() + ".png";
+
+        Path uploadPath = Paths.get("uploads/images/");
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+        Path filePath = uploadPath.resolve(fileName);
+        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        String imageUrl = "https://userservice-mm2v.onrender.com/uploads/images/" + fileName;
+
+        user.setProfileImageUrl(imageUrl);
+        userRepository.save(user);
+
+        return imageUrl;
+    }
+
 }

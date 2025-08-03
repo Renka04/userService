@@ -25,18 +25,27 @@ public class User {
     private String link;
     private String qrCodeUrl;
     private String profileImageUrl;
+    private String gender;
+    private String mobilePhone;
 
-    public User(){
+    public User() {
     }
 
-    public User(Long id, String username, String email, String bio, String location, String job, String link, String qrCodeUrl, String profileImageUrl) {
+    public User(Long id, String username, String email, String bio, String location, String job, String link, String qrCodeUrl,
+                String profileImageUrl, String gender, String mobilePhone) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.bio = bio;
         this.location = location;
         this.job = job;
+        this.link = link;
+        this.qrCodeUrl = qrCodeUrl;
+        this.profileImageUrl = profileImageUrl;
+        this.gender = gender;
+        this.mobilePhone = mobilePhone;
     }
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes = new ArrayList<>();
 
@@ -119,5 +128,21 @@ public class User {
 
     public void setNotes(List<Note> notes) {
         this.notes = notes;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 }
