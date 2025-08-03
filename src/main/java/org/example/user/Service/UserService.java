@@ -35,7 +35,7 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
-        String qrText = "https://yourfrontend.com/user/" + savedUser.getId(); // Replace with actual frontend URL
+        String qrText = "https://yourfrontend.com/user/" + savedUser.getId();
 
         try {
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -46,17 +46,18 @@ public class UserService {
             byte[] pngData = pngOutputStream.toByteArray();
 
             String base64Qr = Base64.getEncoder().encodeToString(pngData);
-            savedUser.setQrCodeUrl("data:image/png;base64," + base64Qr);
 
-            // Save again with QR code
-            savedUser = userRepository.save(savedUser);
+            UserDto resultDto = userMapper.toDto(savedUser);
+            resultDto.setQrCodeUrl("data:image/png;base64," + base64Qr);
+
+            return resultDto;
 
         } catch (WriterException | IOException e) {
-            throw new RuntimeException("Failed to generate QR code", e);
+            e.printStackTrace();
+            return userMapper.toDto(savedUser);
         }
-
-        return userMapper.toDto(savedUser);
     }
+
 
 //    public UserDto createUser(UserDto userDto) {
 //        User user = userMapper.toEntity(userDto);
