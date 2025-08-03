@@ -15,7 +15,12 @@ public class UserMapper {
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
-                user.getBio()
+                user.getBio(),
+                user.getLocation(),
+                user.getJob(),
+                user.getLink(),
+                user.getQrCodeUrl(),
+                user.getProfileImageUrl()
         );
     }
 
@@ -23,11 +28,16 @@ public class UserMapper {
         if (dto == null) {
             return null;
         }
-        return new User(
-                dto.getId(),
-                dto.getUsername(),
-                dto.getEmail(),
-                dto.getBio()
-        );
+        User user = new User();
+        user.setId(dto.getId());
+        user.setUsername(dto.getUsername());
+        user.setEmail(dto.getEmail());
+        user.setBio(dto.getBio());
+        user.setLocation(dto.getLocation());
+        user.setJob(dto.getJob());
+        user.setLink(dto.getLink());
+        user.setQrCodeUrl(dto.getQrCodeUrl());
+        user.setProfileImageUrl(dto.getProfileImageUrl());
+        return user;
     }
 }
