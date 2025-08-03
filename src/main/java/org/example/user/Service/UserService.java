@@ -12,7 +12,9 @@ import org.example.user.Repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,17 +35,20 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
-        String qrText = "https://yourfrontend.com/user/" + savedUser.getId(); // or your real link
-        String fileName = "user_" + savedUser.getId() + ".png";
-        String qrFilePath = "src/main/resources/static/qr/" + fileName;
+        String qrText = "https://yourfrontend.com/user/" + savedUser.getId(); // Actual link
+        String base64Qr = null;
 
         try {
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(qrText, BarcodeFormat.QR_CODE, 250, 250);
-            MatrixToImageWriter.writeToPath(bitMatrix, "PNG", java.nio.file.Paths.get(qrFilePath));
 
-            savedUser.setQrCodeUrl("https://userservice-mm2v.onrender.com/qr/" + fileName);
+            ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
+            MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
+            byte[] pngData = pngOutputStream.toByteArray();
 
+            base64Qr = Base64.getEncoder().encodeToString(pngData);
+
+            savedUser.setQrCodeUrl("data:image/png;base64," + base64Qr);
             savedUser = userRepository.save(savedUser);
 
         } catch (WriterException | IOException e) {
@@ -52,9 +57,6 @@ public class UserService {
 
         return userMapper.toDto(savedUser);
     }
-
-
-
 //    public UserDto createUser(UserDto userDto) {
 //        User user = userMapper.toEntity(userDto);
 //        User savedUser = userRepository.save(user);
