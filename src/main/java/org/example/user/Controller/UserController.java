@@ -75,7 +75,7 @@ public class UserController {
                 .body(pngData);
     }
 
-    @PostMapping("/{id}/upload-profile-image")
+    @PostMapping(value = "/{id}/upload-profile-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadProfileImage(@PathVariable Long id,
                                                      @RequestParam("image") MultipartFile imageFile) {
 
@@ -86,5 +86,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Image upload failed");
         }
     }
+
 
 }
