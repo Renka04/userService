@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -30,6 +32,15 @@ public class User {
 
     public User() {
     }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_soft_skills",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "soft_skill_id")
+    )
+    private Set<SoftSkill> softSkills = new HashSet<>();
+
 
     public User(Long id, String username, String email, String bio, String location, String job, String link, String qrCodeUrl,
                 String profileImageUrl, String gender, String mobilePhone) {
