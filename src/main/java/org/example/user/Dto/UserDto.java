@@ -2,6 +2,8 @@ package org.example.user.Dto;
 
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class UserDto {
 
@@ -16,6 +18,8 @@ public class UserDto {
     private String profileImageUrl;
     private String gender;
     private String mobilePhone;
+    private Set<SoftSkillDTO> softSkills;
+
 
 
     public UserDto(Long id, String username, String email, String bio, String location, String job, String link, String qrCodeUrl,
@@ -32,6 +36,7 @@ public class UserDto {
         this.gender = gender;
         this.mobilePhone = mobilePhone;
     }
+
 
     public UserDto( ) {
     }
@@ -122,5 +127,13 @@ public class UserDto {
 
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
+    }
+
+    public Set<SoftSkillDTO> getSoftSkills() {
+        return softSkills;
+    }
+
+    public void setSoftSkills(Set<SoftSkillDTO> softSkills) {
+        this.softSkills = softSkills;
     }
 }
