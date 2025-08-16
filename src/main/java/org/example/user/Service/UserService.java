@@ -109,23 +109,27 @@ public class UserService {
     }
 
     public String saveProfileImage(Long userId, MultipartFile file) throws IOException {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         String fileName = "profile_" + userId + "_" + System.currentTimeMillis() + ".png";
 
-        Path uploadPath = Paths.get("uploads/images/");
+        Path uploadPath = Paths.get("/opt/app/uploads/images/");
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
+
         Path filePath = uploadPath.resolve(fileName);
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-        String imageUrl = "https://userservice-mm2v.onrender.com/uploads/images/" + fileName;
+        String imageUrl = "http://50.114.185.58:8084/uploads/images/" + fileName;
+
 
         user.setProfileImageUrl(imageUrl);
         userRepository.save(user);
 
         return imageUrl;
     }
+
 
 }

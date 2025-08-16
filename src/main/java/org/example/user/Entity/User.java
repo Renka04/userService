@@ -57,9 +57,6 @@ public class User {
         this.mobilePhone = mobilePhone;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Note> notes = new ArrayList<>();
-
 
     public Long getId() {
         return id;
@@ -131,14 +128,6 @@ public class User {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
-    }
-
-    public List<Note> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<Note> notes) {
-        this.notes = notes;
     }
 
     public String getGender() {
